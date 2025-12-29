@@ -75,23 +75,23 @@ export default function DashboardPage() {
   }
 
   return (
-    <div className="h-screen flex flex-col bg-background overflow-hidden">
+    <div className="flex flex-col min-h-screen lg:h-screen bg-background overflow-y-auto lg:overflow-hidden">
       <DashboardHeader lastRefresh={lastRefresh} />
-      <div className="flex-1 flex flex-col lg:flex-row gap-2 sm:gap-4 p-2 sm:p-4 overflow-y-auto lg:overflow-hidden">
+      <div className="flex-1 flex flex-col lg:flex-row gap-2 sm:gap-4 p-2 sm:p-4 lg:overflow-hidden">
         {/* Metrics Cards - Stack on mobile, sidebar on desktop */}
-        <div className="w-full lg:w-80 flex-shrink-0 lg:overflow-auto">
+        <div className="w-full lg:w-80 shrink-0 lg:overflow-y-auto">
           <MetricsCards data={data} />
         </div>
         
-        {/* Chart and Table - Always stacked vertically */}
-        <div className="flex-1 flex flex-col gap-2 sm:gap-4 min-w-0 lg:overflow-hidden">
+        {/* Chart and Table - Always stacked vertically with scroll */}
+        <div className="flex-1 flex flex-col gap-2 sm:gap-4 min-w-0 lg:overflow-y-auto">
           {/* Temperature Chart */}
-          <div className="h-[50vh] lg:flex-1 lg:min-h-0">
+          <div className="h-[50vh] lg:h-[45vh] shrink-0">
             <TemperatureChart data={data} />
           </div>
           
           {/* Comfort Table */}
-          <div className="flex-1 min-h-[250px] sm:min-h-0 overflow-auto">
+          <div className="flex-1 min-h-[400px]">
             <ComfortTable data={data} />
           </div>
         </div>
