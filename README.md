@@ -1,3 +1,6 @@
+<img width="1280" height="792" alt="image" src="https://github.com/user-attachments/assets/f55691c0-5d04-4200-87d6-50cde4162410" />
+<img width="1280" height="798" alt="image" src="https://github.com/user-attachments/assets/3a3653f1-5508-4442-8795-3a6d16847ee3" />
+
 # Weather Comfort Index
 
 A web app that ranks cities by weather comfort using real-time data from OpenWeatherMap. Includes Auth0 authentication and a responsive dashboard.
