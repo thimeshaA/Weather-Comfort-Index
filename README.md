@@ -1,5 +1,5 @@
-<img width="1280" height="792" alt="image" src="https://github.com/user-attachments/assets/f55691c0-5d04-4200-87d6-50cde4162410" />
-<img width="1280" height="798" alt="image" src="https://github.com/user-attachments/assets/3a3653f1-5508-4442-8795-3a6d16847ee3" />
+<img width="1440" height="898" alt="Screenshot 2025-12-29 at 20 07 00" src="https://github.com/user-attachments/assets/e62180a2-4bf9-4523-8662-7750350dd70c" />
+<img width="1436" height="893" alt="Screenshot 2025-12-29 at 20 07 27" src="https://github.com/user-attachments/assets/33b5396b-02c6-476c-b8c7-e6d1dc751b42" />
 
 # Weather Comfort Index
 
