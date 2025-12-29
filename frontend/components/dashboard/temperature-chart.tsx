@@ -95,8 +95,8 @@ export function TemperatureChart({ data }: TemperatureChartProps) {
   }))
 
   return (
-    <Card className="p-2 sm:p-3 lg:p-4 shadow-lg h-full flex flex-col">
-      <div className="mb-1 sm:mb-2 flex-shrink-0">
+    <Card className="p-2 sm:p-3 lg:p-4 shadow-lg h-full max-h-25vh flex flex-col">
+      <div className="mb-1 sm:mb-2 shrink-0">
         <h2 className="text-sm sm:text-base lg:text-lg font-bold text-foreground">Temperature & Comfort Trends</h2>
         <p className="text-[10px] sm:text-xs text-muted-foreground">
           Temperature: <span className="text-blue-500">Cool</span> · <span className="text-yellow-500">Normal</span> · <span className="text-red-500">Hot</span> | Comfort: <span className="text-emerald-500">Score</span>
