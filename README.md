@@ -89,6 +89,15 @@ npm run dev                 # Runs on http://localhost:3000
 cd backend
 npm test
 ```
+**Login Access given to following Accounts:**
+
+1. kanishka.d@fidenz.com
+2. srimal.w@fidenz.com
+3. narada.a@fidenz.com
+4. amindu.l@fidenz.com
+5. niroshanan.s@fidenz.com
+
+use Password - Pass#fidenz
 
 ### Auth0 Setup
 
