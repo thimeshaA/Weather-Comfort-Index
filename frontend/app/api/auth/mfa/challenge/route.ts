@@ -49,14 +49,21 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Find the email authenticator
+    // Find an active email authenticator (prefer active ones)
     let emailAuthenticator = authenticatorsData.find(
-      (auth: any) => auth.authenticator_type === 'oob' && auth.oob_channel === 'email'
+      (auth: any) => auth.authenticator_type === 'oob' && auth.oob_channel === 'email' && auth.active === true
     );
 
-    // If no email authenticator exists OR it's inactive, enroll/re-enroll
-    if (!emailAuthenticator || emailAuthenticator.active === false) {
-      console.log(emailAuthenticator ? 'Email authenticator inactive - re-enrolling' : 'No email authenticator - enrolling');
+    // If no active email authenticator exists, try to find any email authenticator
+    if (!emailAuthenticator) {
+      emailAuthenticator = authenticatorsData.find(
+        (auth: any) => auth.authenticator_type === 'oob' && auth.oob_channel === 'email'
+      );
+    }
+
+    // If no email authenticator exists at all, enroll
+    if (!emailAuthenticator) {
+      console.log('No email authenticator - enrolling');
       
       if (!userEmail) {
         return NextResponse.json(
@@ -111,9 +118,11 @@ export async function POST(request: NextRequest) {
       method: 'POST',
       headers: { 
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${mfaToken}`,
       },
       body: JSON.stringify({
+        client_id: clientId,
+        client_secret: clientSecret,
+        mfa_token: mfaToken,
         challenge_type: 'oob',
         authenticator_id: emailAuthenticator.id,
       }),
