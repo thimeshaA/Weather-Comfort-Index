@@ -464,11 +464,6 @@ Fidenz/
 
 ---
 
-## License
-
-MIT
-
----
 
 ## Author
 
