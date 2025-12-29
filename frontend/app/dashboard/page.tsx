@@ -75,16 +75,16 @@ export default function DashboardPage() {
   }
 
   return (
-    <div className="flex flex-col min-h-screen lg:h-screen bg-background overflow-y-auto lg:overflow-hidden">
+    <div className="flex flex-col min-h-screen lg:h-screen bg-background overflow-y-auto lg:overflow-hidden scrollbar-hide">
       <DashboardHeader lastRefresh={lastRefresh} />
       <div className="flex-1 flex flex-col lg:flex-row gap-2 sm:gap-4 p-2 sm:p-4 lg:overflow-hidden">
         {/* Metrics Cards - Stack on mobile, sidebar on desktop */}
-        <div className="w-full lg:w-80 shrink-0 lg:overflow-y-auto">
+        <div className="w-full lg:w-80 shrink-0 lg:overflow-y-auto scrollbar-hide">
           <MetricsCards data={data} />
         </div>
         
         {/* Chart and Table - Always stacked vertically with scroll */}
-        <div className="flex-1 flex flex-col gap-2 sm:gap-4 min-w-0 lg:overflow-y-auto">
+        <div className="flex-1 flex flex-col gap-2 sm:gap-4 min-w-0 lg:overflow-y-auto scrollbar-hide">
           {/* Temperature Chart */}
           <div className="h-[50vh] lg:h-[45vh] shrink-0">
             <TemperatureChart data={data} />
