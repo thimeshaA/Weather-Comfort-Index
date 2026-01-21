@@ -8,7 +8,7 @@ import "./globals.css"
 export const metadata: Metadata = {
   title: "Weather Comfort Index",
   description: "Real-time weather comfort analytics dashboard",
-  generator: "v0.app",
+  // generator: "v0.app",
   icons: {
     icon: [
       {
