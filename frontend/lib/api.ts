@@ -1,11 +1,13 @@
 /**
  * Backend API Client
- * Handles communication with the Weather Comfort Index backend
+ * Handles communication with the Weather Comfort Index API routes
  */
 
 import axios from 'axios';
 
-const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:3001';
+// In Next.js, we use relative paths to call our own API routes
+// This works both in development and production
+const API_BASE = process.env.NEXT_PUBLIC_API_BASE || '';
 
 export interface ComfortData {
   rank: number;
@@ -37,18 +39,18 @@ export interface CacheStatus {
 }
 
 /**
- * Fetch comfort index data from backend
+ * Fetch comfort index data from API
  * Requires authentication - JWT token must be provided
  */
 export async function getComfortIndex(accessToken: string): Promise<ComfortIndexResponse> {
   try {
     const response = await axios.get<ComfortIndexResponse>(
-      `${BACKEND_URL}/api/comfort-index`,
+      `${API_BASE}/api/comfort-index`,
       {
         headers: {
           Authorization: `Bearer ${accessToken}`,
         },
-        timeout: 10000, // 10 second timeout
+        timeout: 30000, // 30 second timeout for weather API calls
       }
     );
 
@@ -59,24 +61,26 @@ export async function getComfortIndex(accessToken: string): Promise<ComfortIndex
         throw new Error('Unauthorized - Please log in again');
       }
       if (error.response?.status === 500) {
-        throw new Error('Backend server error - Please try again later');
+        console.error('API error:', error.response?.data);
+        throw new Error('Server error - Please try again later');
       }
-      if (error.code === 'ECONNREFUSED') {
-        throw new Error('Cannot connect to backend - Ensure the server is running');
+      if (error.code === 'ECONNABORTED') {
+        throw new Error('Request timeout - Weather API is taking too long');
       }
     }
+    console.error('Comfort index fetch error:', error);
     throw new Error('Failed to fetch comfort index data');
   }
 }
 
 /**
- * Fetch cache status from backend
+ * Fetch cache status from API
  * Requires authentication - JWT token must be provided
  */
 export async function getCacheStatus(accessToken: string): Promise<CacheStatus> {
   try {
     const response = await axios.get<CacheStatus>(
-      `${BACKEND_URL}/api/cache-status`,
+      `${API_BASE}/api/cache-status`,
       {
         headers: {
           Authorization: `Bearer ${accessToken}`,
@@ -101,9 +105,10 @@ export async function getCacheStatus(accessToken: string): Promise<CacheStatus> 
  */
 export async function checkBackendHealth(): Promise<boolean> {
   try {
-    const response = await axios.get(`${BACKEND_URL}/health`, { timeout: 3000 });
+    const response = await axios.get(`${API_BASE}/api/health`, { timeout: 3000 });
     return response.data.status === 'OK';
   } catch (error) {
     return false;
   }
 }
+
