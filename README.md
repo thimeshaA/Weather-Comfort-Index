@@ -14,8 +14,9 @@ A web app that ranks cities by weather comfort using real-time data from OpenWea
 
 ## Tech Stack
 
-**Backend:** Node.js, Express, TypeScript, Auth0, Jest  
-**Frontend:** Next.js 16, React, TypeScript, Tailwind CSS
+**Full-Stack:** Next.js 16 (App Router), React, TypeScript, Tailwind CSS  
+**Backend:** Next.js API Routes, Node.js, Auth0  
+**Testing:** Jest
 
 ---
 
@@ -67,27 +68,21 @@ These weights are based on thermal comfort research (ASHRAE standards) showing t
 
 ### Quick Start
 
-**Backend:**
 ```bash
-cd backend
+# Install dependencies
 npm install
-cp .env.example .env  # Add your API keys
-npm run dev           # Runs on http://localhost:3001
-```
 
-**Frontend:**
-```bash
-cd frontend
-npm install
-cp .env.example .env.local  # Add your Auth0 credentials
-npm run dev                 # Runs on http://localhost:3000
-```
+# Configure environment variables
+cp .env.example .env.local
+# Add your OPENWEATHER_API_KEY and Auth0 credentials
 
-**Run Tests:**
-```bash
-cd backend
+# Run development server
+npm run dev  # Runs on http://localhost:3000
+
+# Run tests (if available)
 npm test
 ```
+
 **Login Access given to following Accounts:**
 
 1. kanishka.d@fidenz.com
@@ -161,12 +156,12 @@ Cache is lost on server restart. For production with multiple servers, use Redis
 
 ## API Endpoints
 
-**Backend:**
-- `GET /health` - Health check
-- `GET /api/comfort-index` - Get ranked cities (requires auth)
-- `GET /api/cache-status` - Cache statistics (requires auth)
+**API Routes (Next.js):**
+- `GET /api/health` - Health check (no auth required)
+- `GET /api/comfort-index` - Get ranked cities by comfort score
+- `GET /api/cache-status` - Cache statistics and debug info
 
-**Frontend:**
+**Frontend Pages:**
 - `/` - Home (redirects to login or dashboard)
 - `/login` - Login page
 - `/dashboard` - Main dashboard (protected)
